@@ -1,0 +1,236 @@
+openapi: 3.0.0
+info:
+  title: Job Bank
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://job-bank.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/URLauthregisterRequest"
+            example:
+              name: vahidkss
+              email: vahissdk@email.com
+              password: 123s45678
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/URLauthloginRequest"
+            example:
+              email: vahwwwaqqqqid@emailaa.com
+              password: 12awwa345678
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - jobs
+      summary: Create job
+      operationId: Createjob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/URLjobscreatejobRequest"
+            example:
+              company: netflix
+              position: intern12
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - jobs
+      summary: Get all jobs
+      operationId: Getalljobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the job id
+    get:
+      tags:
+        - jobs
+      summary: Get single job
+      operationId: Getsinglejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - jobs
+      summary: Update a job
+      operationId: Updateajob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/URLjobs620b79487b7d67dea19f553bpatchRequest"
+            example:
+              company: wwww
+              position: wwwww
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - jobs
+      summary: Delete a job
+      operationId: Deleteajob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    URLauthregisterRequest:
+      title: URLauthregisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: vahidkss
+        email: vahissdk@email.com
+        password: 123s45678
+    URLauthloginRequest:
+      title: URLauthloginRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: vahwwwaqqqqid@emailaa.com
+        password: 12awwa345678
+    URLjobscreatejobRequest:
+      title: URLjobscreatejobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: netflix
+        position: intern12
+    URLjobs620b79487b7d67dea19f553bpatchRequest:
+      title: URLjobs620b79487b7d67dea19f553bpatchRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: wwww
+        position: wwwww
+    PROD_URLauthlogin_Request:
+      title: PROD_URLauthlogin_Request
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: vahwwwaqqqqid@emailaa.com
+        password: 12awwa345678
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: jobs
+    description: ""
