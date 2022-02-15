@@ -1,10 +1,15 @@
 require("dotenv").config();
 require("express-async-errors");
+
 //extra security package
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+//swagger:
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 const express = require("express");
 const app = express();
@@ -30,6 +35,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
+app.get("/", (req, res) => {
+  res.send('<h1>Jobs bank API</h1><a href="/api-docs">Documentation</a>');
+});
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes
 app.use("/api/v1/auth", authRouter);
