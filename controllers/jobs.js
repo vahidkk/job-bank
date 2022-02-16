@@ -5,6 +5,10 @@ const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
   res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
 };
+const getAllJobsByAllUsers = async (req, res) => {
+  const jobs = await Job.find().sort("createdAt");
+  res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
+};
 const getJob = async (req, res) => {
   const {
     user: { userId },
@@ -55,4 +59,11 @@ const deleteJobs = async (req, res) => {
   res.status(StatusCodes.OK).send();
 };
 
-module.exports = { getAllJobs, getJob, createJobs, updateJobs, deleteJobs };
+module.exports = {
+  getAllJobs,
+  getJob,
+  createJobs,
+  updateJobs,
+  deleteJobs,
+  getAllJobsByAllUsers,
+};
