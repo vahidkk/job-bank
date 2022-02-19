@@ -13,8 +13,8 @@ const JobsSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["interview", "declined", "pending"],
-      default: "pending",
+      enum: ["under45k", "between45k-70k", "morethan70k"],
+      default: "under45k",
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
